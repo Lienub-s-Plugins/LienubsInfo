@@ -1,0 +1,4 @@
+name: LienubsInfo
+version: '${project.version}'
+main: lienub.dev.lienubsinfo.LienubsInfo
+api-version: '1.20'
