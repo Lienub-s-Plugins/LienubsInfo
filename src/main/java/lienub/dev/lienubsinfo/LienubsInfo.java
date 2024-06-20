@@ -1,6 +1,9 @@
 package lienub.dev.lienubsinfo;
 
 import lienub.dev.lienubsinfo.listeners.ChatListener;
+import lienub.dev.lienubsinfo.listeners.PlayerJoinListener;
+import lienub.dev.lienubsinfo.listeners.PlayerQuitListener;
+import lienub.dev.lienubsinfo.task.TabListTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -86,6 +89,9 @@ public final class LienubsInfo extends JavaPlugin {
         logger.log(Level.INFO, "Registering listeners...");
         registerListener();
 
+        logger.log(Level.INFO, "Registering tasks...");
+        registerTask();
+
         logger.log(Level.INFO, () -> "Plugin started in " + (System.nanoTime() - timestamp) + " nanoseconds.");
 
     }
@@ -93,5 +99,11 @@ public final class LienubsInfo extends JavaPlugin {
     private void registerListener() {
         // Register listeners here
         new ChatListener(this);
+        new PlayerJoinListener(this);
+        new PlayerQuitListener(this);
+    }
+
+    private void registerTask() {
+        new TabListTask(this).runTaskTimerAsynchronously(this, 20L, 20L);
     }
 }
